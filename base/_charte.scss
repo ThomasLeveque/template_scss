@@ -1,0 +1,7 @@
+body {
+  background-color: $white;
+  position: relative;
+  &.fixed {
+    overflow-y: hidden;
+  }
+}

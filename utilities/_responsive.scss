@@ -1,0 +1,127 @@
+// responsive
+// --------
+// This file includes a set of mixins designed for responsive building.
+//
+
+// Breakpoints
+// -----------
+// **palm** starts at `320px` and ends at `767px`.
+$mobile-start: 320px !default;
+$mobile-end: 767px !default;
+// for iphone 5
+$mobile-small-end: 465px !default;
+
+// **lap** starts at `768px` and ends at `1023px`.
+$tabl-start: 768px !default;
+$tabl-end: 1023px !default;
+
+// **desk** starts at `1024px`.
+$desk-start: 1024px !default;
+$small-desk-end: 1366px !default;
+$desk-wide-start: 1400px !default;
+
+// media-query
+@mixin media-query($media-query) {
+  @if $media-query == mobile {
+    @media only screen and (min-width: $mobile-start) and (max-width: $mobile-end) {
+      @content;
+    }
+  }
+  @if $media-query == mobile-pt {
+    @media only screen and (min-width: $mobile-start) and (max-width: $mobile-end) and (orientation: portrait) {
+      @content;
+    }
+  }
+  @if $media-query == mobile-ld {
+    @media only screen and (min-width: $mobile-start) and (max-width: $mobile-end) and (orientation: landscape) {
+      @content;
+    }
+  }
+  @if $media-query == mobile-small {
+    @media only screen and (min-width: $mobile-start) and (max-width: $mobile-small-end) {
+      @content;
+    }
+  }
+  @if $media-query == tabl {
+    @media only screen and (min-width: $tabl-start) and (max-width: $tabl-end) {
+      @content;
+    }
+  }
+  @if $media-query == table-pt {
+    @media only screen and (min-width: $tabl-start) and (max-width: $tabl-end) and (orientation: portrait) {
+      @content;
+    }
+  }
+  @if $media-query == table-ld {
+    @media only screen and (min-width: $tabl-start) and (max-width: $tabl-end) and (orientation: landscape) {
+      @content;
+    }
+  }
+  @if $media-query == device {
+    @media only screen and (max-width: $desk-start) {
+      @content;
+    }
+  }
+  @if $media-query == small-desk {
+    @media only screen and (min-width: $desk-start) and (max-width: $small-desk-end) {
+      @content;
+    }
+  }
+  @if $media-query == desk {
+    @media only screen and (min-width: $desk-start) {
+      @content;
+    }
+  }
+  @if $media-query == desk-wide {
+    @media only screen and (min-width: $desk-wide-start) {
+      @content;
+    }
+  }
+}
+
+$grid-padding: 8px;
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -#{$grid-padding};
+}
+
+.col {
+  padding: 0 $grid-padding;
+  margin: $grid-padding 0;
+
+  @include media-query(device) {
+    width: 100%;
+  }
+
+  div {
+    width: 100%;
+  }
+}
+
+@for $i from 1 through $grid {
+  @include media-query(mobile) {
+    .s-#{$i} {
+      width: calc((100% * #{$i}) / #{$grid})
+    }
+  }
+
+  @include media-query(tabl) {
+    .m-#{$i} {
+      width: calc((100% * #{$i}) / #{$grid})
+    }
+  }
+  @include media-query(desk) {
+    .l-#{$i} {
+      width: calc((100% * #{$i}) / #{$grid})
+    }
+  }
+
+}
+
+
+
+
+
+
